@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/inicioStyle.css">
+    <script src="../JS/inicioScript.js" defer></script>
+</head>
+<body>
+
+    <div class="dashboard">
+        <!-- barra lateral -->
+        <aside class="sidebar">
+            <div class= "logo">
+                <img src="../src/Love_cookies.png" alt="Logo de love cokies">
+            </div>
+            
+
+            <nav class="menu">
+                <ul>
+                    <li class="active">
+                        <a href="inicio.html">
+                            <span class="material-symbols-outlined" aria-hidden="true">grid_view</span>
+                            <span>Inicio</span>
+                        </a>
+                    </li>
+                    <li><a href="productos.html">
+                        <span class="material-symbols-outlined" aria-hidden="true">cookie</span>
+                        <span>Productos</span>
+                    </a></li>
+                    <li><a href="pedidos.html">
+                        <span class="material-symbols-outlined" aria-hidden="true">assignment</span>
+                        <span>Pedidos</span>
+                    </a></li>
+                    <li><a href="clientes.html">
+                        <span class="material-symbols-outlined" aria-hidden="true">group</span>
+                        <span>Clientes</span>
+                    </a></li>
+                    <li><a href="usuarios.html">
+                        <span class="material-symbols-outlined" aria-hidden="true">identity_platform</span>
+                        <span>Usuarios</span>
+                    </a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <!-- contenido -->
+        <main class="content">
+            <div class="topbar">
+            <p class="breadcrumb">Love Cookies <span>/</span> Inicio</p>
+
+            <div class="perfil">
+                <span id="nombre-perfil"></span>
+                <button class="perfil-boton" type="button" aria-label="Perfil del administrador">
+                <span>●</span>
+                </button>
+            </div>
+            </div>
+            <header class="header">
+                <h1>!Bienvenido admin!</h1>
+            </header>
+            <section class="welcome-card">
+
+                <div class="welcome-text">
+                    <h2>¡Hola de nuevo!</h2>
+                    <p id="fecha"></p>
+                </div>
+
+                <div class="actions">
+                    <button id="nuevo-pedido">Nuevo pedido</button>
+                    <button id="nuevo-producto">Nuevo producto</button>
+                </div>
+
+            </section>
+            <section class="resumen">
+                <article class="resumen-card">
+                    <h2 id="ventas-totales">-</h2>
+                    <p>Ventas totales</p>
+                </article>
+
+                <article class="resumen-card">
+                    <h2 id="pedidos-pendientes">-</h2>
+                    <p>Pedidos por entregar</p>
+                </article>
+
+                <article class="resumen-card">
+                    <h2 id="total-productos">-</h2>
+                    <p>Productos</p>
+                </article>
+
+                <article class="resumen-card">
+                    <h2 id="total-clientes">-</h2>
+                    <p>Clientes</p>
+                </article>
+            </section>
+
+            <section class="paneles">
+                <article class="panel pedidos">
+                    <h2>Pedidos recientes</h2>
+                    <p class="mensaje-vacio">Aún no hay pedidos para mostrar.</p>
+                </article>
+
+                <article class="panel stock">
+                    <h2>Stock bajo</h2>
+                    <p class="mensaje-vacio">Aún no hay productos para mostrar.</p>
+                </article>
+            </section>
+        </main>
+
+    </div>
+
+</body>
+</html>
