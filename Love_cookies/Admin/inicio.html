@@ -8,7 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/baseStyle.css">
     <link rel="stylesheet" href="../css/inicioStyle.css">
+    <script src="../JS/baseScript.js" defer></script>
     <script src="../JS/inicioScript.js" defer></script>
 </head>
 <body>
@@ -52,7 +54,10 @@
         <!-- contenido -->
         <main class="content">
             <div class="topbar">
-            <p class="breadcrumb">Love Cookies <span>/</span> Inicio</p>
+            <div class="topbar-izq">
+                <button class="menu-btn" type="button" aria-label="Abrir menú">☰</button>
+                <p class="breadcrumb">Love Cookies <span>/</span> Inicio</p>
+            </div>
 
             <div class="perfil">
                 <span id="nombre-perfil"></span>
@@ -79,22 +84,22 @@
             </section>
             <section class="resumen">
                 <article class="resumen-card">
-                    <h2 id="ventas-totales">-</h2>
+                    <h2 id="ventas-totales">$0</h2>
                     <p>Ventas totales</p>
                 </article>
 
                 <article class="resumen-card">
-                    <h2 id="pedidos-pendientes">-</h2>
+                    <h2 id="pedidos-pendientes">0</h2>
                     <p>Pedidos por entregar</p>
                 </article>
 
                 <article class="resumen-card">
-                    <h2 id="total-productos">-</h2>
+                    <h2 id="total-productos">0</h2>
                     <p>Productos</p>
                 </article>
 
                 <article class="resumen-card">
-                    <h2 id="total-clientes">-</h2>
+                    <h2 id="total-clientes">0</h2>
                     <p>Clientes</p>
                 </article>
             </section>
