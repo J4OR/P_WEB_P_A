@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/baseStyle.css">
+    <link rel="stylesheet" href="../CSS/usuariosStyle.css">
+    <script src="../JS/baseScript.js" defer></script>
+    <script src="../JS/listadoScript.js" defer></script>
+    <script src="../JS/validacionScript.js" defer></script>
+    <script src="../JS/formularioScript.js" defer></script>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- barra lateral -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="../src/Love_cookies.png" alt="Logo de Love Cookies">
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="inicio.html">
+                        <span class="material-symbols-outlined" aria-hidden="true">grid_view</span>
+                        <span>Inicio</span>
+                    </a></li>
+                    <li><a href="productos.html">
+                        <span class="material-symbols-outlined" aria-hidden="true">cookie</span>
+                        <span>Productos</span>
+                    </a></li>
+                    <li><a href="pedidos.html">
+                        <span class="material-symbols-outlined" aria-hidden="true">assignment</span>
+                        <span>Pedidos</span>
+                    </a></li>
+                    <li><a href="clientes.html">
+                        <span class="material-symbols-outlined" aria-hidden="true">identity_platform</span>
+                        <span>Clientes</span>
+                    </a></li>
+                    <li class="active"><a href="usuarios.html">
+                        <span class="material-symbols-outlined" aria-hidden="true">group</span>
+                        <span>Usuarios</span>
+                    </a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- contenido -->
+        <main class="content">
+            <div class="topbar">
+                <div class="topbar-izq">
+                    <button class="menu-btn" type="button" aria-label="Abrir menú">☰</button>
+                    <p class="breadcrumb">Love Cookies <span>/</span> Usuarios</p>
+                </div>
+                <div class="perfil">
+                    <span id="nombre-perfil"></span>
+                    <button class="perfil-boton" type="button" aria-label="Perfil del administrador"><span class="material-symbols-outlined" aria-hidden="true">account_circle</span></button>
+                </div>
+            </div>
+            <!-- LISTADO -->
+            <section id="vista-lista">
+            <header class="header encabezado"><div><h1>Usuarios</h1></div><button class="boton" type="button" data-nuevo><span class="material-symbols-outlined" aria-hidden="true">add</span> Nuevo usuario</button></header>
+            <section class="resumen resumen-3">
+                <article class="resumen-card"><h2>0</h2><p>Usuarios</p></article>
+                <article class="resumen-card"><h2>0</h2><p>Activos</p></article>
+                <article class="resumen-card"><h2>0</h2><p>Admin</p></article>
+            </section>
+            <div class="buscador-caja"><span class="material-symbols-outlined" aria-hidden="true">search</span><input class="buscador" type="search" placeholder="Buscar usuario..." aria-label="Buscar usuario..."></div>
+            <div class="filtros"><button class="filtro seleccionado" type="button" data-filtro="">Todos</button><button class="filtro" type="button" data-filtro="Admin">Admin</button><button class="filtro" type="button" data-filtro="Usuario">Usuario</button></div>
+            <div class="tabla-contenedor"><table class="tabla"><thead><tr><th>Nombre completo</th><th>Correo electrónico</th><th>Rol</th><th>Usuario activo</th><th>Acciones</th></tr></thead>
+<tbody>
+<tr class="fila-vacia"><td colspan="5">Aún no hay usuarios. Usa «+ Nuevo usuario» para agregar el primero.</td></tr>
+</tbody></table></div>
+            <p class="pie-tabla"><span>Mostrando 0 de 0 usuarios</span><span>0 activos · 0 inactivos</span></p>
+            <dialog id="dialogo" class="dialogo"><p>¿Seguro que quieres eliminar este registro? Esta acción no se puede deshacer.</p>
+                <form method="dialog"><button class="boton secundario" value="no">Cancelar</button><button class="boton" value="si">Sí, eliminar</button></form></dialog>
+            </section>
+
+            <!-- FORMULARIO (agregar / editar) -->
+            <section id="vista-formulario" hidden>
+            <header class="header"><h1><span class="modo">Agregar</span> usuario</h1></header>
+            <p class="subtitulo">Completa los datos del usuario y asigna su rol.</p>
+            <form class="formulario panel" novalidate>
+                <div class="cuadricula">
+                    <div class="campo"><label>Nombre completo *</label><input name="nombre" data-col="0" placeholder="Escribe el nombre completo" required><small class="error"></small></div>
+                    <div class="campo"><label>Correo electrónico *</label><input name="correo" type="email" data-col="1" placeholder="Escribe el correo electrónico" required><small class="error"></small></div>
+                </div>
+                <div class="campo"><label>Rol *</label><div class="opciones"><label><input type="radio" name="rol" value="Admin" data-col="2"> Admin</label><label><input type="radio" name="rol" value="Usuario" data-col="2" checked> Usuario</label></div></div>
+                <div class="campo"><label>Usuario activo</label><label class="interruptor"><span><b>Activo</b><small>Permite que el usuario acceda al sistema.</small></span><input type="checkbox" name="activo" data-col="3" checked></label></div>
+                <small class="ayuda">El rol define los permisos de acceso. Solo puedes asignar Admin o Usuario.</small>
+                <p class="mensaje-exito" role="status"></p>
+                <div class="pie-formulario"><small>* Campos obligatorios</small><div class="fila"><button class="boton secundario" type="button" data-cancelar>Cancelar</button><button class="boton" type="submit"><span class="texto-guardar">Guardar usuario</span></button></div></div>
+            </form>
+            <button class="volver" type="button" data-cancelar><span class="material-symbols-outlined" aria-hidden="true">arrow_back</span> Volver a Usuarios</button>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

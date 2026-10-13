@@ -1,0 +1,386 @@
+/* =====================================================
+   clientesStyle.css · Solo para clientes.html
+   Listado, formulario de agregar / editar y contadores de clientes
+   (lo común a todas las páginas está en baseStyle.css)
+   ===================================================== */
+
+/* ########## LISTADO: encabezado, buscador, filtros, tabla y diálogo ########## */
+
+/* Encabezado: título a la izquierda y botón a la derecha */
+.encabezado{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:24px;
+}
+
+.encabezado h1{
+  margin-bottom:0;
+}
+
+.encabezado p{
+  color:#8b756e;
+  font-size:.85rem;
+}
+
+/* Botón principal; .secundario es la versión con borde */
+.boton{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  padding:10px 16px;
+  border:1px solid #a11a12;
+  border-radius:8px;
+  background-color:#a11a12;
+  color:white;
+  cursor:pointer;
+  text-decoration:none;
+  font-size:.9rem;
+  text-align:center;
+}
+
+.boton .material-symbols-outlined{
+  font-size:1.2rem;
+}
+
+.boton:hover{
+  background-color:#87100a;
+  box-shadow:0 6px 18px rgba(214,31,15,.947);
+}
+
+.boton.secundario{
+  background-color:white;
+  color:#a11a12;
+}
+
+.boton.secundario:hover{
+  background-color:#fbe4e1;
+  box-shadow:none;
+}
+
+/* Buscador */
+.buscador-caja{
+  position:relative;
+  margin-bottom:12px;
+}
+
+.buscador-caja .material-symbols-outlined{
+  position:absolute;
+  left:14px;
+  top:50%;
+  transform:translateY(-50%);
+  color:#a11a12;
+  font-size:1.2rem;
+  pointer-events:none;
+}
+
+.buscador{
+  width:100%;
+  padding:11px 16px 11px 42px;
+  border:1px solid #e8e6c8;
+  border-radius:10px;
+  background:white;
+}
+
+/* Filtros en forma de píldora; .seleccionado es el filtro activo */
+.filtros{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:16px;
+}
+
+.filtro{
+  padding:7px 16px;
+  border:1px solid #a11a12;
+  border-radius:20px;
+  background:white;
+  color:#a11a12;
+  cursor:pointer;
+  font-size:.85rem;
+}
+
+.filtro.seleccionado{
+  background:#a11a12;
+  color:white;
+}
+
+/* Tabla: el contenedor hace scroll horizontal en pantallas pequeñas */
+.tabla-contenedor{
+  overflow-x:auto;
+  background:white;
+  border:1px solid #eee9dc;
+  border-radius:10px;
+  box-shadow:0 6px 18px rgba(155,34,23,.881);
+}
+
+.tabla{
+  width:100%;
+  border-collapse:collapse;
+  min-width:640px;
+}
+
+.tabla th{
+  background:#f4f3dc;
+  color:#a11a12;
+  text-align:left;
+  font-size:.78rem;
+  padding:12px 14px;
+}
+
+.tabla td{
+  padding:12px 14px;
+  border-top:1px solid #eee9dc;
+  font-size:.85rem;
+  vertical-align:middle;
+}
+
+.acciones{
+  white-space:nowrap;
+  text-align:right;
+}
+
+/* Botones de editar y eliminar (íconos Material Symbols) */
+.icono-boton{
+  width:36px;
+  height:34px;
+  margin-left:6px;
+  border:1px solid #a11a12;
+  border-radius:8px;
+  background:#f4f3dc;
+  color:#a11a12;
+  cursor:pointer;
+}
+
+.icono-boton:hover{
+  background:#ebe4c2;
+}
+
+.icono-boton .material-symbols-outlined{
+  font-size:1.1rem;
+  vertical-align:middle;
+}
+
+/* Pie de tabla con resumen */
+.pie-tabla{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:12px;
+  padding:12px 4px;
+  color:#8b756e;
+  font-size:.8rem;
+}
+
+/* Diálogo de confirmación al eliminar */
+.dialogo{
+  border:2px solid #a11a12;
+  border-radius:12px;
+  padding:24px;
+  max-width:360px;
+  margin:auto;
+}
+
+.dialogo::backdrop{
+  background:rgba(43,26,24,.55);
+}
+
+.dialogo p{
+  margin-bottom:18px;
+}
+
+.dialogo form{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+}
+
+/* ########## FORMULARIO: campos, errores, opciones y botones ########## */
+
+/* Tarjeta del formulario (usa el estilo .panel de baseStyle.css) */
+.formulario{
+  display:grid;
+  gap:18px;
+  padding:24px;
+}
+
+.subtitulo{
+  color:#8b756e;
+  margin:-14px 0 18px;
+  font-size:.9rem;
+}
+
+/* Cuadrícula de dos columnas */
+.cuadricula{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+/* Cada campo: etiqueta + control + mensaje de error */
+.campo{
+  display:grid;
+  gap:6px;
+  align-content:start;
+}
+
+.campo>label,.etiqueta{
+  font-weight:700;
+  font-size:.85rem;
+  color:#a11a12;
+}
+
+.campo input:not([type=radio]):not([type=checkbox]),.campo select,.campo textarea{
+  width:100%;
+  padding:11px 14px;
+  border:1px solid #e8e6c8;
+  border-radius:10px;
+  background:white;
+}
+
+.campo input[readonly]{
+  background:#fdfcf2;
+}
+
+/* Campo con error (la clase .invalido la pone validacionScript.js) */
+.campo .invalido{
+  border-color:#c4251c;
+  background:#fff7f6;
+}
+
+.error{
+  color:#c4251c;
+  font-size:.78rem;
+}
+
+.ayuda{
+  color:#8b756e;
+  font-size:.8rem;
+}
+
+/* Opciones tipo radio en forma de caja (entrega, estado, rol) */
+.opciones{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.opciones label{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  padding:11px 14px;
+  border:1px solid #e8e6c8;
+  border-radius:10px;
+  background:white;
+  cursor:pointer;
+}
+
+.opciones label:has(:checked){
+  background:#f4f3dc;
+  border-color:#a11a12;
+}
+
+input[type=radio],input[type=checkbox]{
+  accent-color:#a11a12;
+}
+
+/* Mensaje de éxito al guardar; si está vacío no se muestra */
+.mensaje-exito{
+  color:#267348;
+  font-weight:700;
+}
+
+.mensaje-exito:empty{
+  display:none;
+}
+
+/* Pie con campos obligatorios y botones */
+.pie-formulario{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+  border-top:1px solid #e8e6c8;
+  padding-top:16px;
+  font-size:.8rem;
+  color:#8b756e;
+}
+
+.volver{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  margin-top:14px;
+  padding:0;
+  border:0;
+  background:none;
+  color:#a11a12;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.volver .material-symbols-outlined{
+  font-size:1.3rem;
+}
+
+/* Celular: una columna y botones a todo el ancho */
+@media (max-width:600px){
+  .cuadricula,.opciones{
+    grid-template-columns:1fr;
+  }
+
+  .pie-formulario,.pie-formulario .fila{
+    width:100%;
+  }
+
+  .pie-formulario .boton{
+    flex:1;
+  }
+}
+
+/* ########## PROPIO DE CLIENTES ########## */
+
+/* Contadores del encabezado: 2 columnas */
+.resumen.resumen-2{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+/* ----- Formulario de agregar / editar ----- */
+
+/* Datos automáticos del cliente (fecha de registro y pedidos; no se editan) */
+.info-auto{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  padding:14px 18px;
+  border-radius:10px;
+  background:#f4f3dc;
+}
+
+.info-auto b,.info-auto span{
+  display:block;
+}
+
+.info-auto b{
+  color:#a11a12;
+  font-size:.85rem;
+}
+
+/* Celular: una columna */
+@media (max-width:600px){
+  .info-auto{
+    grid-template-columns:1fr;
+  }
+}
+
+/* Fila que aparece cuando la tabla no tiene datos */
+.fila-vacia td{
+  text-align:center;
+  color:#8b756e;
+  padding:28px 14px;
+}
