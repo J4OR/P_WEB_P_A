@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuarios</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -25,23 +24,23 @@
             <nav class="menu">
                 <ul>
                     <li><a href="inicio.html">
-                        <span class="material-symbols-outlined" aria-hidden="true">grid_view</span>
+                        <img src="../src/iconos/inicio.png" alt="" aria-hidden="true">
                         <span>Inicio</span>
                     </a></li>
                     <li><a href="productos.html">
-                        <span class="material-symbols-outlined" aria-hidden="true">cookie</span>
+                        <img src="../src/iconos/productos.png" alt="" aria-hidden="true">
                         <span>Productos</span>
                     </a></li>
                     <li><a href="pedidos.html">
-                        <span class="material-symbols-outlined" aria-hidden="true">assignment</span>
+                        <img src="../src/iconos/pedidos.png" alt="" aria-hidden="true">
                         <span>Pedidos</span>
                     </a></li>
                     <li><a href="clientes.html">
-                        <span class="material-symbols-outlined" aria-hidden="true">identity_platform</span>
+                        <img src="../src/iconos/clientes.png" alt="" aria-hidden="true">
                         <span>Clientes</span>
                     </a></li>
                     <li class="active"><a href="usuarios.html">
-                        <span class="material-symbols-outlined" aria-hidden="true">group</span>
+                        <img src="../src/iconos/usuarios-activo.png" alt="" aria-hidden="true">
                         <span>Usuarios</span>
                     </a></li>
                 </ul>
@@ -57,18 +56,18 @@
                 </div>
                 <div class="perfil">
                     <span id="nombre-perfil"></span>
-                    <button class="perfil-boton" type="button" aria-label="Perfil del administrador"><span class="material-symbols-outlined" aria-hidden="true">account_circle</span></button>
+                    <button class="perfil-boton" type="button" aria-label="Perfil del administrador"><img src="../src/iconos/perfil.png" alt="" aria-hidden="true"></button>
                 </div>
             </div>
             <!-- LISTADO -->
             <section id="vista-lista">
-            <header class="header encabezado"><div><h1>Usuarios</h1></div><button class="boton" type="button" data-nuevo><span class="material-symbols-outlined" aria-hidden="true">add</span> Nuevo usuario</button></header>
+            <header class="header encabezado"><div><h1>Usuarios</h1></div><button class="boton" type="button" data-nuevo><img src="../src/iconos/agregar-claro.png" alt="" aria-hidden="true"> Nuevo usuario</button></header>
             <section class="resumen resumen-3">
                 <article class="resumen-card"><h2>0</h2><p>Usuarios</p></article>
                 <article class="resumen-card"><h2>0</h2><p>Activos</p></article>
                 <article class="resumen-card"><h2>0</h2><p>Admin</p></article>
             </section>
-            <div class="buscador-caja"><span class="material-symbols-outlined" aria-hidden="true">search</span><input class="buscador" type="search" placeholder="Buscar usuario..." aria-label="Buscar usuario..."></div>
+            <div class="buscador-caja"><img src="../src/iconos/buscar.png" alt="" aria-hidden="true"><input class="buscador" type="search" placeholder="Buscar usuario..." aria-label="Buscar usuario..."></div>
             <div class="filtros"><button class="filtro seleccionado" type="button" data-filtro="">Todos</button><button class="filtro" type="button" data-filtro="Admin">Admin</button><button class="filtro" type="button" data-filtro="Usuario">Usuario</button></div>
             <div class="tabla-contenedor"><table class="tabla"><thead><tr><th>Nombre completo</th><th>Correo electrónico</th><th>Rol</th><th>Usuario activo</th><th>Acciones</th></tr></thead>
 <tbody>
@@ -94,7 +93,7 @@
                 <p class="mensaje-exito" role="status"></p>
                 <div class="pie-formulario"><small>* Campos obligatorios</small><div class="fila"><button class="boton secundario" type="button" data-cancelar>Cancelar</button><button class="boton" type="submit"><span class="texto-guardar">Guardar usuario</span></button></div></div>
             </form>
-            <button class="volver" type="button" data-cancelar><span class="material-symbols-outlined" aria-hidden="true">arrow_back</span> Volver a Usuarios</button>
+            <button class="volver" type="button" data-cancelar><img src="../src/iconos/volver.png" alt="" aria-hidden="true"> Volver a Usuarios</button>
             </section>
         </main>
     </div>
