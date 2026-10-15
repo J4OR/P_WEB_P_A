@@ -67,9 +67,10 @@ function rellenarFormulario(form, registro) {
 }
 
 // Crea un registro nuevo o actualiza el que se está editando
-function guardarRegistro(form) {
+function guardarRegistro(form, fotos) {
   const lista = leer();
   const datos = recogerDatos(form);
+  if (fotos !== undefined) datos.fotos = fotos;
   const indice = editandoId ? lista.findIndex(r => r.id === editandoId) : -1;
   const pedidoAnterior = indice === -1 ? null : lista[indice];
   const revertirRelacionado = config.antesDeGuardar?.(datos, pedidoAnterior);
@@ -174,6 +175,8 @@ function mostrarFormulario(fila) {
   const editando = !!fila;
   editandoId = editando ? fila.dataset.id : null;
   formulario.reset();
+  fotosSeleccionadas = [];
+  actualizarFotos();
   limpiarErrores(formulario);
   formulario.querySelector('.mensaje-exito').textContent = '';
   document.querySelector('.modo').textContent = editando ? 'Editar' : 'Agregar';
@@ -181,7 +184,14 @@ function mostrarFormulario(fila) {
 
   if (editando) {
     const registro = leer().find(r => r.id === editandoId);
-    if (registro) rellenarFormulario(formulario, registro);
+    if (registro) {
+      rellenarFormulario(formulario, registro);
+      fotosSeleccionadas = (registro.fotos || []).map(foto => ({
+        name: foto.name,
+        dataUrl: foto.dataUrl
+      }));
+      actualizarFotos();
+    }
   }
   // Datos automáticos (fecha de registro y pedidos del cliente)
   formulario.querySelectorAll('[data-fill]').forEach(x => {
@@ -210,7 +220,7 @@ document.addEventListener('click', e => {
   if (e.target.closest('[data-cancelar]')) mostrarLista();
 });
 
-formulario.addEventListener('submit', e => {
+formulario.addEventListener('submit', async e => {
   e.preventDefault();
   const mensaje = formulario.querySelector('.mensaje-exito');
   mensaje.textContent = '';
@@ -219,19 +229,122 @@ formulario.addEventListener('submit', e => {
     formulario.querySelector('.invalido')?.focus();
     return;
   }
-  if (!guardarRegistro(formulario)) return;
-  mensaje.textContent = 'Guardado correctamente.';
-  setTimeout(mostrarLista, 1000);
+  const botonGuardar = formulario.querySelector('[type="submit"]');
+  botonGuardar.disabled = true;
+  try {
+    const fotos = entradaFotos
+      ? await Promise.all(fotosSeleccionadas.map(async foto => ({
+        name: foto.name,
+        dataUrl: foto.dataUrl || await leerFotoComoDataURL(foto.file)
+      })))
+      : undefined;
+    if (!guardarRegistro(formulario, fotos)) return;
+    mensaje.textContent = 'Guardado correctamente.';
+    setTimeout(mostrarLista, 1000);
+  } catch (error) {
+    console.error('No se pudieron preparar las fotos para guardar.', error);
+    mensaje.textContent = 'No se pudieron guardar las fotos. Inténtalo de nuevo.';
+  } finally {
+    botonGuardar.disabled = false;
+  }
 });
 
 formulario.addEventListener('input', e => {
   if (e.target.classList.contains('invalido')) validar(formulario);
 });
 
-document.querySelectorAll('.subida input').forEach(input => input.addEventListener('change', () => {
-  input.parentElement.querySelector('.subida-texto').textContent =
-    input.files.length ? input.files.length + ' foto(s) seleccionada(s)' : 'Toca para subir fotos o arrástralas aquí';
-}));
+const entradaFotos = formulario.querySelector('.subida input[type="file"]');
+const miniaturas = formulario.querySelector('.miniaturas');
+let fotosSeleccionadas = [];
+let urlsMiniaturas = [];
+
+function leerFotoComoDataURL(foto) {
+  return new Promise((resolve, reject) => {
+    const lector = new FileReader();
+    lector.addEventListener('load', () => resolve(lector.result));
+    lector.addEventListener('error', () => reject(lector.error));
+    lector.readAsDataURL(foto);
+  });
+}
+
+function actualizarFotos() {
+  if (!entradaFotos || !miniaturas) return;
+
+  const transferencia = new DataTransfer();
+  fotosSeleccionadas.forEach(foto => {
+    if (foto.file) transferencia.items.add(foto.file);
+  });
+  entradaFotos.files = transferencia.files;
+
+  const texto = entradaFotos.parentElement.querySelector('.subida-texto');
+  texto.textContent = fotosSeleccionadas.length
+    ? `${fotosSeleccionadas.length} foto(s) seleccionada(s)`
+    : 'Toca para subir fotos o arrástralas aquí';
+
+  urlsMiniaturas.forEach(url => URL.revokeObjectURL(url));
+  urlsMiniaturas = [];
+  miniaturas.replaceChildren();
+
+  fotosSeleccionadas.forEach((foto, indice) => {
+    const tarjeta = document.createElement('div');
+    tarjeta.className = 'miniatura';
+
+    const imagen = document.createElement('img');
+    imagen.src = foto.dataUrl || URL.createObjectURL(foto.file);
+    imagen.alt = foto.name;
+    if (!foto.dataUrl) urlsMiniaturas.push(imagen.src);
+
+    const quitar = document.createElement('button');
+    quitar.type = 'button';
+    quitar.className = 'miniatura-quitar';
+    quitar.textContent = '×';
+    quitar.setAttribute('aria-label', `Quitar ${foto.name}`);
+    quitar.dataset.indice = indice;
+
+    tarjeta.append(imagen, quitar);
+    miniaturas.append(tarjeta);
+  });
+}
+
+function agregarFotos(archivos) {
+  const firmasExistentes = new Set(fotosSeleccionadas.map(foto =>
+    foto.file
+      ? `${foto.name}-${foto.file.size}-${foto.file.lastModified}-${foto.file.type}`
+      : foto.name
+  ));
+  [...archivos].filter(foto => foto.type.startsWith('image/')).forEach(archivo => {
+    const firma = `${archivo.name}-${archivo.size}-${archivo.lastModified}-${archivo.type}`;
+    if (!firmasExistentes.has(firma)) {
+      fotosSeleccionadas.push({ name: archivo.name, file: archivo });
+      firmasExistentes.add(firma);
+    }
+  });
+  actualizarFotos();
+}
+
+if (entradaFotos && miniaturas) {
+  entradaFotos.addEventListener('change', () => agregarFotos(entradaFotos.files));
+  miniaturas.addEventListener('click', e => {
+    const quitar = e.target.closest('.miniatura-quitar');
+    if (!quitar) return;
+    fotosSeleccionadas.splice(Number(quitar.dataset.indice), 1);
+    actualizarFotos();
+  });
+
+  const zonaSubida = entradaFotos.closest('.subida');
+  zonaSubida.addEventListener('dragover', e => {
+    e.preventDefault();
+    zonaSubida.classList.add('arrastrando');
+  });
+  zonaSubida.addEventListener('dragleave', e => {
+    if (!zonaSubida.contains(e.relatedTarget)) zonaSubida.classList.remove('arrastrando');
+  });
+  zonaSubida.addEventListener('drop', e => {
+    e.preventDefault();
+    zonaSubida.classList.remove('arrastrando');
+    agregarFotos(e.dataTransfer.files);
+  });
+}
 
 /* ----- Al cargar la página ----- */
 dibujarTabla();

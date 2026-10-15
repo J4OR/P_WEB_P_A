@@ -386,6 +386,57 @@ input[type="checkbox"] {
   font-weight: 700;
 }
 
+.subida.arrastrando {
+  border-color: #a11a12;
+  background: #fbe4e1;
+}
+
+.miniaturas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.miniaturas:empty {
+  display: none;
+}
+
+.miniatura {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.miniatura img {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #e8e6c8;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.miniatura-quitar {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #a11a12;
+  color: white;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.miniatura-quitar:hover {
+  background: #87100a;
+}
+
 /* Fila que aparece cuando la tabla no tiene datos */
 .fila-vacia td {
   text-align: center;
