@@ -26,7 +26,10 @@ button,input,select,textarea{
 .sidebar{
   width:250px;
   flex:none;
-  background-color:#F4F3DC
+  background-color:#F4F3DC;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
 }
 .content{
   flex:1;
@@ -54,6 +57,10 @@ button,input,select,textarea{
   list-style:none
 }
 
+.menu{
+  flex:1
+}
+
 .menu a{
   display:flex;
   align-items:center;
@@ -75,6 +82,25 @@ button,input,select,textarea{
   background-color:#a11a12;
   color:#f4f3dc;
   box-shadow:0 6px 18px rgba(155,34,23,.881);
+}
+
+.sidebar-toggle{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:42px;
+  height:42px;
+  margin:12px 12px 0 auto;
+  border:1px solid #a11a12;
+  border-radius:10px;
+  background:#fffef8;
+  color:#a11a12;
+  cursor:pointer
+}
+
+.sidebar-toggle:hover{
+  background:#a11a12;
+  color:#f4f3dc
 }
 
 /* ----- Barra superior con ruta (breadcrumb) y perfil ----- */
@@ -219,8 +245,19 @@ button,input,select,textarea{
   .sidebar{position:fixed;top:0;left:0;height:100vh;z-index:20;overflow-y:auto;transform:translateX(-100%);transition:transform .25s}
   .sidebar.abierto{transform:none;box-shadow:6px 0 20px rgba(0,0,0,.25)}
   .menu-btn{display:inline-flex}
+  .sidebar-toggle{display:none}
   .content{padding:20px}
   .topbar{margin:-20px -20px 20px;padding:0 20px}
+}
+@media (min-width:901px){
+  .sidebar.animacion-activa{transition:width .25s ease}
+  .sidebar.colapsada{width:82px}
+  .sidebar.colapsada > .sidebar-toggle{margin-left:auto;margin-right:auto}
+  .sidebar.colapsada .logo{height:100px}
+  .sidebar.colapsada .logo img{width:54px;height:54px;object-fit:contain}
+  .sidebar.colapsada .menu a{justify-content:center;padding:15px 8px}
+  .sidebar.colapsada .menu a span:not(.material-symbols-outlined){display:none}
+  .sidebar.colapsada .menu a .material-symbols-outlined{font-size:1.5rem}
 }
 @media (max-width:700px){.resumen{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (prefers-reduced-motion:reduce){.sidebar{transition:none}}

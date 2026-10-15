@@ -206,6 +206,10 @@
   align-content:start;
 }
 
+#campo-direccion-entrega[hidden]{
+  display:none;
+}
+
 .campo>label,.etiqueta{
   font-weight:700;
   font-size:.85rem;

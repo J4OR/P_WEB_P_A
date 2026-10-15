@@ -15,6 +15,7 @@ function validar(form) {
     if (campo.required && !valor) mensaje = 'Este campo es obligatorio.';
     else if (valor && campo.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor)) mensaje = 'Escribe un correo válido, por ejemplo nombre@lovecookies.co.';
     else if (valor && campo.name === 'celular' && !/^3\d{9}$/.test(valor)) mensaje = 'El celular debe tener 10 dígitos y empezar por 3.';
+    else if (valor && campo.name === 'identificacion' && !/^\d{6,12}$/.test(valor)) mensaje = 'La identificación debe tener entre 6 y 12 dígitos.';
     else if (valor && campo.dataset.entero !== undefined && (!/^\d+$/.test(valor) || +valor < minimo)) mensaje = 'Escribe un número entero de ' + minimo + ' en adelante.';
     const error = campo.closest('.campo')?.querySelector('.error');
     if (error) error.textContent = mensaje;

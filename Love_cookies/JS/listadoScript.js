@@ -11,6 +11,7 @@ function filtrar() {
   document.querySelectorAll('.tabla tbody tr').forEach(fila => {
     fila.hidden = !(fila.textContent.toLowerCase().includes(texto) && (!filtro || fila.textContent.includes(filtro)));
   });
+  window.actualizarPieTabla?.();
 }
 buscador?.addEventListener('input', filtrar);
 filtros.forEach(f => f.addEventListener('click', () => {
@@ -31,6 +32,7 @@ document.addEventListener('click', e => {
   }
 });
 dialogo.addEventListener('close', () => {
-  if (dialogo.returnValue === 'si' && filaAEliminar) filaAEliminar.remove();
+  if (dialogo.returnValue === 'si' && filaAEliminar) eliminarRegistro(filaAEliminar.dataset.id);
   filaAEliminar = null;
+  dialogo.returnValue = '';
 });

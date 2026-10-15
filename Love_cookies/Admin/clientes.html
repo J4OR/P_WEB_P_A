@@ -13,6 +13,7 @@
     <script src="../JS/baseScript.js" defer></script>
     <script src="../JS/listadoScript.js" defer></script>
     <script src="../JS/validacionScript.js" defer></script>
+    <script src="../JS/configCliente.js" defer></script>
     <script src="../JS/formularioScript.js" defer></script>
 </head>
 <body>
@@ -67,8 +68,8 @@
                 <article class="resumen-card"><h2>0</h2><p>Clientes</p></article>
                 <article class="resumen-card"><h2>0</h2><p>Pedidos hechos</p></article>
             </section>
-            <div class="buscador-caja"><span class="material-symbols-outlined" aria-hidden="true">search</span><input class="buscador" type="search" placeholder="Buscar cliente por nombre o celular..." aria-label="Buscar cliente por nombre o celular..."></div>
-            <div class="tabla-contenedor"><table class="tabla"><thead><tr><th>Nombre completo</th><th>Celular</th><th>Dirección</th><th>Fecha de registro</th><th>Pedidos</th><th>Acciones</th></tr></thead>
+            <div class="buscador-caja"><span class="material-symbols-outlined" aria-hidden="true">search</span><input class="buscador" type="search" placeholder="Buscar cliente por nombre, identificación o celular..." aria-label="Buscar cliente por nombre, identificación o celular..."></div>
+            <div class="tabla-contenedor"><table class="tabla"><thead><tr><th>Nombre completo</th><th>Identificación</th><th>Celular</th><th>Fecha de registro</th><th>Pedidos</th><th>Acciones</th></tr></thead>
 <tbody>
 <tr class="fila-vacia"><td colspan="6">Aún no hay clientes. Usa «+ Nuevo cliente» para agregar el primero.</td></tr>
 </tbody></table></div>
@@ -83,9 +84,9 @@
             <form class="formulario panel" novalidate>
                 <div class="cuadricula">
                     <div class="campo"><label>Nombre completo *</label><input name="nombre" data-col="0" placeholder="Escribe el nombre completo" required><small class="error"></small></div>
-                    <div class="campo"><label>Celular *</label><input name="celular" data-col="1" inputmode="numeric" placeholder="Escribe el número de celular" required><small class="error"></small></div>
+                    <div class="campo"><label>Identificación *</label><input name="identificacion" data-col="1" inputmode="numeric" maxlength="12" placeholder="Escribe el número de identificación" required><small class="error"></small></div>
+                    <div class="campo"><label>Celular *</label><input name="celular" data-col="2" inputmode="numeric" placeholder="Escribe el número de celular" required><small class="error"></small></div>
                 </div>
-                <div class="campo"><label>Dirección</label><textarea name="direccion" data-col="2" rows="3" placeholder="Escribe la dirección del cliente"></textarea><small class="ayuda">Campo opcional. Puedes dejarlo vacío si no tienes esta información.</small></div>
                 <div class="info-auto"><div><b>Fecha de registro</b><span data-fill="3" data-def="Se asigna al guardar">Se asigna al guardar</span></div><div><b>Pedidos</b><span data-fill="4" data-def="0">0</span></div></div>
                 <small class="ayuda">La fecha de registro y el número de pedidos se gestionan automáticamente.</small>
                 <p class="mensaje-exito" role="status"></p>
