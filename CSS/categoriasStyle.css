@@ -1,0 +1,219 @@
+.encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.encabezado h1 {
+  margin-bottom: 0;
+}
+
+.encabezado p {
+  color: #8b756e;
+  font-size: 0.85rem;
+}
+
+.resumen {
+  grid-template-columns: minmax(0, 260px);
+}
+
+.boton {
+  display: inline-block;
+  padding: 10px 16px;
+  border: 1px solid #a11a12;
+  border-radius: 8px;
+  background-color: #a11a12;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.boton:hover {
+  background-color: #87100a;
+}
+
+.boton.secundario {
+  background-color: white;
+  color: #a11a12;
+}
+
+.buscador-caja {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 16px 0;
+  padding: 0 14px;
+  border: 1px solid #e8e6c8;
+  border-radius: 10px;
+  background: white;
+  color: #8b756e;
+}
+
+.buscador {
+  width: 100%;
+  padding: 11px 0;
+  border: 0;
+  outline: 0;
+}
+
+.tabla-contenedor {
+  overflow-x: auto;
+  background: white;
+  border: 1px solid #eee9dc;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(155, 34, 23, 0.2);
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla th {
+  background: #f4f3dc;
+  color: #a11a12;
+  text-align: left;
+  font-size: 0.85rem;
+  padding: 12px 14px;
+}
+
+.tabla td {
+  padding: 12px 14px;
+  border-top: 1px solid #eee9dc;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.fila-vacia td {
+  text-align: center;
+  color: #8b756e;
+  padding: 28px 14px;
+}
+
+.acciones {
+  white-space: nowrap;
+  text-align: right;
+}
+
+.icono-boton {
+  width: 36px;
+  height: 34px;
+  margin-left: 6px;
+  border: 1px solid #a11a12;
+  border-radius: 8px;
+  background: #f4f3dc;
+  color: #a11a12;
+  cursor: pointer;
+}
+
+.icono-boton .material-symbols-outlined {
+  font-size: 1.1rem;
+  vertical-align: middle;
+}
+
+.dialogo {
+  max-width: 360px;
+  margin: auto;
+  padding: 24px;
+  border: 2px solid #a11a12;
+  border-radius: 12px;
+}
+
+.dialogo::backdrop {
+  background: rgba(43, 26, 24, 0.55);
+}
+
+.dialogo p {
+  margin-bottom: 18px;
+}
+
+.dialogo form {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.formulario {
+  display: grid;
+  gap: 18px;
+  padding: 24px;
+}
+
+.campo {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+
+.campo > label {
+  color: #a11a12;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.campo input,
+.campo textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #e8e6c8;
+  border-radius: 10px;
+  background: white;
+}
+
+.campo .invalido {
+  border-color: #c4251c;
+  background: #fff7f6;
+}
+
+.error {
+  color: #c4251c;
+  font-size: 0.78rem;
+}
+
+.mensaje-exito {
+  color: #267348;
+}
+
+.mensaje-lista {
+  margin: 10px 0;
+  color: #c4251c;
+  font-size: 0.85rem;
+}
+
+.pie-formulario {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.pie-formulario > small {
+  color: #8b756e;
+}
+
+.fila {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.volver {
+  margin-top: 18px;
+  border: 0;
+  background: none;
+  color: #a11a12;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .pie-formulario {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

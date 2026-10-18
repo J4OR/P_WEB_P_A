@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorías</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <script>
+        try {
+            document.documentElement.classList.toggle("sidebar-colapsada", localStorage.getItem("sidebar-colapsada") !== "false");
+        } catch {
+            document.documentElement.classList.add("sidebar-colapsada");
+        }
+    </script>
+    <link rel="stylesheet" href="../CSS/baseStyle.css">
+    <link rel="stylesheet" href="../CSS/categoriasStyle.css">
+    <script type="module" src="../JS/controllers/categoriaController.js"></script>
+</head>
+<body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <button class="sidebar-toggle" type="button" aria-label="Expandir barra lateral" aria-expanded="false">
+                <span class="material-symbols-outlined" aria-hidden="true"></span>
+            </button>
+            <div class="logo"><img src="../src/Love_cookies.png" alt="Logo de Love Cookies"></div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="inicio.html"><span class="material-symbols-outlined" aria-hidden="true">grid_view</span><span>Inicio</span></a></li>
+                    <li><a href="productos.html"><span class="material-symbols-outlined" aria-hidden="true">cookie</span><span>Productos</span></a></li>
+                    <li class="active"><a href="categorias.html" aria-current="page"><span class="material-symbols-outlined" aria-hidden="true">category</span><span>Categorías</span></a></li>
+                    <li><a href="pedidos.html"><span class="material-symbols-outlined" aria-hidden="true">assignment</span><span>Pedidos</span></a></li>
+                    <li><a href="clientes.html"><span class="material-symbols-outlined" aria-hidden="true">identity_platform</span><span>Clientes</span></a></li>
+                    <li><a href="usuarios.html"><span class="material-symbols-outlined" aria-hidden="true">group</span><span>Usuarios</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="content">
+            <div class="topbar">
+                <div class="topbar-izq"><p class="breadcrumb">Love Cookies <span>/</span> Categorías</p></div>
+                <div class="perfil">
+                    <span id="nombre-perfil"></span>
+                    <button class="perfil-boton" type="button" aria-label="Perfil del administrador"><span class="material-symbols-outlined" aria-hidden="true">account_circle</span></button>
+                </div>
+            </div>
+            <section id="vista-lista">
+                <header class="header encabezado">
+                    <div><h1>Categorías</h1><p>Organiza los productos de tu tienda</p></div>
+                    <button class="boton" type="button" data-nuevo>+ Nueva categoría</button>
+                </header>
+                <section class="resumen resumen-2">
+                    <article class="resumen-card"><h2>0</h2><p>Categorías</p></article>
+                </section>
+                <div class="buscador-caja">
+                    <span class="material-symbols-outlined" aria-hidden="true">search</span>
+                    <input class="buscador" type="search" placeholder="Buscar categoría..." aria-label="Buscar categoría">
+                </div>
+                <p class="mensaje-lista" role="status"></p>
+                <div class="tabla-contenedor">
+                    <table class="tabla">
+                        <thead><tr><th>Nombre</th><th>Descripción</th><th>Acciones</th></tr></thead>
+                        <tbody><tr class="fila-vacia"><td colspan="3">Aún no hay categorías. Agrega una para poder asignarla a tus productos.</td></tr></tbody>
+                    </table>
+                </div>
+                <dialog id="dialogo" class="dialogo">
+                    <p>¿Seguro que quieres eliminar esta categoría? Esta acción no se puede deshacer.</p>
+                    <form method="dialog"><button class="boton secundario" value="no">Cancelar</button><button class="boton" value="si">Sí, eliminar</button></form>
+                </dialog>
+            </section>
+            <section id="vista-formulario" hidden>
+                <header class="header"><h1><span class="modo">Agregar</span> categoría</h1></header>
+                <form class="formulario panel" novalidate>
+                    <div class="campo">
+                        <label for="nombre-categoria">Nombre *</label>
+                        <input id="nombre-categoria" name="nombre" data-col="0" maxlength="40" required>
+                        <small class="error"></small>
+                    </div>
+                    <div class="campo">
+                        <label for="descripcion-categoria">Descripción</label>
+                        <textarea id="descripcion-categoria" name="descripcion" data-col="1" rows="3" maxlength="160"></textarea>
+                        <small class="error"></small>
+                    </div>
+                    <p class="mensaje-exito" role="status"></p>
+                    <div class="pie-formulario">
+                        <small>* Campos obligatorios</small>
+                        <div class="fila">
+                            <button class="boton secundario" type="button" data-cancelar>Cancelar</button>
+                            <button class="boton" type="submit"><span class="texto-guardar">Guardar categoría</span></button>
+                        </div>
+                    </div>
+                </form>
+                <button class="volver" type="button" data-cancelar><span class="material-symbols-outlined" aria-hidden="true">arrow_back</span> Volver a Categorías</button>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

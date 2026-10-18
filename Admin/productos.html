@@ -12,24 +12,25 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+    <script>
+        try {
+            document.documentElement.classList.toggle("sidebar-colapsada", localStorage.getItem("sidebar-colapsada") !== "false");
+        } catch {
+            document.documentElement.classList.add("sidebar-colapsada");
+        }
+    </script>
     <link rel="stylesheet" href="../CSS/baseStyle.css">
     <link rel="stylesheet" href="../CSS/productosStyle.css">
-    <script src="../JS/compartido/menu.js" defer></script>
-    <script src="../JS/compartido/perfil.js" defer></script>
-    <script src="../JS/compartido/listado.js" defer></script>
-    <script src="../JS/compartido/validacion.js" defer></script>
-    <script src="../JS/configuracion/producto.js" defer></script>
-    <script src="../JS/datos/repositorioLocal.js" defer></script>
-    <script src="../JS/servicios/registrosService.js" defer></script>
-    <script src="../JS/componentes/tablaRegistros.js" defer></script>
-    <script src="../JS/formularios/fotos.js" defer></script>
-    <script src="../JS/formularios/controladorFormulario.js" defer></script>
+  <script type="module" src="../JS/controllers/productoController.js"></script>
 </head>
 
 <body>
     <div class="dashboard">
         <!-- barra lateral -->
         <aside class="sidebar">
+            <button class="sidebar-toggle" type="button" aria-label="Expandir barra lateral" aria-expanded="false">
+                <span class="material-symbols-outlined" aria-hidden="true"></span>
+            </button>
             <div class="logo">
                 <img src="../src/Love_cookies.png" alt="Logo de Love Cookies">
             </div>
@@ -42,6 +43,10 @@
                     <li class="active"><a href="productos.html">
                             <span class="material-symbols-outlined" aria-hidden="true">cookie</span>
                             <span>Productos</span>
+                        </a></li>
+                    <li><a href="categorias.html">
+                            <span class="material-symbols-outlined" aria-hidden="true">category</span>
+                            <span>Categorías</span>
                         </a></li>
                     <li><a href="pedidos.html">
                             <span class="material-symbols-outlined" aria-hidden="true">assignment</span>
@@ -63,7 +68,6 @@
         <main class="content">
             <div class="topbar">
                 <div class="topbar-izq">
-                    <button class="menu-btn" type="button" aria-label="Abrir menú">☰</button>
                     <p class="breadcrumb">Love Cookies <span>/</span> Productos</p>
                 </div>
                 <div class="perfil">
@@ -96,9 +100,7 @@
                 <div class="buscador-caja"><span class="material-symbols-outlined"
                         aria-hidden="true">search</span><input class="buscador" type="search"
                         placeholder="Buscar producto por nombre..." aria-label="Buscar producto por nombre..."></div>
-                <div class="filtros"><button class="filtro seleccionado" type="button"
-                        data-filtro="">Todas</button><button class="filtro" type="button"
-                        data-filtro="Galletas">Galletas</button></div>
+                <div class="filtros"><button class="filtro seleccionado" type="button" data-filtro="">Todas</button></div>
                 <div class="tabla-contenedor">
                     <table class="tabla">
                         <thead>
@@ -108,7 +110,7 @@
                                 <th>Precio</th>
                                 <th>Stock</th>
                                 <th>Estado</th>
-                                <th>Acciones</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -141,8 +143,7 @@
                                 class="error"></small></div>
                         <div class="campo"><label>Categoría *</label><select name="categoria" data-col="1" required>
                                 <option value="">Elegir...</option>
-                                <option>Galletas</option>
-                            </select><small class="error"></small></div>
+                            </select><small class="error"></small><small class="ayuda">Primero crea una categoría desde el menú Categorías.</small></div>
                         <div class="campo"><label>Precio (COP) *</label><input name="precio" data-col="2" data-entero
                                 data-min="1" inputmode="numeric" required><small class="error"></small></div>
                         <div class="campo"><label>Stock (unidades) *</label><input name="stock" data-col="3" data-entero

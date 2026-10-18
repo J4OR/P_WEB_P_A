@@ -345,10 +345,10 @@ input[type=radio],input[type=checkbox]{
   background:#f4f3dc;
 }
 
-/* Cada línea: producto | cantidad | botón quitar */
+/* Cada línea: producto | precio unitario | cantidad | botón quitar */
 .linea{
   display:grid;
-  grid-template-columns:1fr 110px 40px;
+  grid-template-columns:minmax(0,1fr) 130px 110px 40px;
   gap:10px;
   align-items:start;
   margin-bottom:8px;
@@ -360,16 +360,34 @@ input[type=radio],input[type=checkbox]{
   color:#8b756e;
 }
 
+.precio-unitario{
+  min-height:42px;
+  display:flex;
+  align-items:center;
+  color:#2b1a18;
+  font-size:.9rem;
+  white-space:nowrap;
+}
+
 .linea .icono-boton{
   margin:0;
   height:42px;
   width:40px;
 }
 
-/* Celular: cantidad más angosta */
+/* Celular: campos compactos para mantener la fila dentro de la pantalla */
 @media (max-width:600px){
   .linea{
-    grid-template-columns:1fr 80px 40px;
+    grid-template-columns:minmax(0,1fr) 100px 68px 40px;
+    gap:6px;
+  }
+
+  .linea-encabezado{
+    font-size:.7rem;
+  }
+
+  .precio-unitario{
+    font-size:.75rem;
   }
 }
 

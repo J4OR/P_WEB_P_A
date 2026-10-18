@@ -8,23 +8,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script>
+        try {
+            document.documentElement.classList.toggle("sidebar-colapsada", localStorage.getItem("sidebar-colapsada") !== "false");
+        } catch {
+            document.documentElement.classList.add("sidebar-colapsada");
+        }
+    </script>
     <link rel="stylesheet" href="../CSS/baseStyle.css">
     <link rel="stylesheet" href="../CSS/usuariosStyle.css">
-    <script src="../JS/compartido/menu.js" defer></script>
-    <script src="../JS/compartido/perfil.js" defer></script>
-    <script src="../JS/compartido/listado.js" defer></script>
-    <script src="../JS/compartido/validacion.js" defer></script>
-    <script src="../JS/configuracion/usuario.js" defer></script>
-    <script src="../JS/datos/repositorioLocal.js" defer></script>
-    <script src="../JS/servicios/registrosService.js" defer></script>
-    <script src="../JS/componentes/tablaRegistros.js" defer></script>
-    <script src="../JS/formularios/fotos.js" defer></script>
-    <script src="../JS/formularios/controladorFormulario.js" defer></script>
+  <script type="module" src="../JS/controllers/usuarioController.js"></script>
 </head>
 <body>
     <div class="dashboard">
         <!-- barra lateral -->
         <aside class="sidebar">
+            <button class="sidebar-toggle" type="button" aria-label="Expandir barra lateral" aria-expanded="false">
+                <span class="material-symbols-outlined" aria-hidden="true"></span>
+            </button>
             <div class="logo">
                 <img src="../src/Love_cookies.png" alt="Logo de Love Cookies">
             </div>
@@ -37,6 +38,10 @@
                     <li><a href="productos.html">
                         <span class="material-symbols-outlined" aria-hidden="true">cookie</span>
                         <span>Productos</span>
+                    </a></li>
+                    <li><a href="categorias.html">
+                        <span class="material-symbols-outlined" aria-hidden="true">category</span>
+                        <span>Categorías</span>
                     </a></li>
                     <li><a href="pedidos.html">
                         <span class="material-symbols-outlined" aria-hidden="true">assignment</span>
@@ -58,7 +63,6 @@
         <main class="content">
             <div class="topbar">
                 <div class="topbar-izq">
-                    <button class="menu-btn" type="button" aria-label="Abrir menú">☰</button>
                     <p class="breadcrumb">Love Cookies <span>/</span> Usuarios</p>
                 </div>
                 <div class="perfil">
@@ -93,7 +97,10 @@
                 <div class="cuadricula">
                     <div class="campo"><label>Nombre completo *</label><input name="nombre" data-col="0" placeholder="Escribe el nombre completo" required><small class="error"></small></div>
                     <div class="campo"><label>Correo electrónico *</label><input name="correo" type="email" data-col="1" placeholder="Escribe el correo electrónico" required><small class="error"></small></div>
+                    <div class="campo"><label for="contrasena">Contraseña *</label><input id="contrasena" name="contrasena" type="password" autocomplete="new-password" minlength="8" required><small class="error"></small></div>
+                    <div class="campo"><label for="confirmar-contrasena">Confirmar contraseña *</label><input id="confirmar-contrasena" name="confirmarContrasena" type="password" autocomplete="new-password" minlength="8" required><small class="error"></small></div>
                 </div>
+                <small class="ayuda" data-password-help>Usa al menos 8 caracteres. La contraseña no se mostrará después de guardarla.</small>
                 <div class="campo"><label>Rol *</label><div class="opciones"><label><input type="radio" name="rol" value="Admin" data-col="2"> Admin</label><label><input type="radio" name="rol" value="Usuario" data-col="2" checked> Usuario</label></div></div>
                 <div class="campo"><label>Usuario activo</label><label class="interruptor"><span><b>Activo</b><small>Permite que el usuario acceda al sistema.</small></span><input type="checkbox" name="activo" data-col="3" checked></label></div>
                 <small class="ayuda">El rol define los permisos de acceso. Solo puedes asignar Admin o Usuario.</small>

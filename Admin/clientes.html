@@ -8,23 +8,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script>
+        try {
+            document.documentElement.classList.toggle("sidebar-colapsada", localStorage.getItem("sidebar-colapsada") !== "false");
+        } catch {
+            document.documentElement.classList.add("sidebar-colapsada");
+        }
+    </script>
     <link rel="stylesheet" href="../CSS/baseStyle.css">
     <link rel="stylesheet" href="../CSS/clientesStyle.css">
-    <script src="../JS/compartido/menu.js" defer></script>
-    <script src="../JS/compartido/perfil.js" defer></script>
-    <script src="../JS/compartido/listado.js" defer></script>
-    <script src="../JS/compartido/validacion.js" defer></script>
-    <script src="../JS/configuracion/cliente.js" defer></script>
-    <script src="../JS/datos/repositorioLocal.js" defer></script>
-    <script src="../JS/servicios/registrosService.js" defer></script>
-    <script src="../JS/componentes/tablaRegistros.js" defer></script>
-    <script src="../JS/formularios/fotos.js" defer></script>
-    <script src="../JS/formularios/controladorFormulario.js" defer></script>
+<script type="module" src="../JS/controllers/clienteController.js"></script>
 </head>
 <body>
     <div class="dashboard">
         <!-- barra lateral -->
         <aside class="sidebar">
+            <button class="sidebar-toggle" type="button" aria-label="Expandir barra lateral" aria-expanded="false">
+                <span class="material-symbols-outlined" aria-hidden="true"></span>
+            </button>
             <div class="logo">
                 <img src="../src/Love_cookies.png" alt="Logo de Love Cookies">
             </div>
@@ -38,6 +39,10 @@
                         <span class="material-symbols-outlined" aria-hidden="true">cookie</span>
                         <span>Productos</span>
                     </a></li>
+                    <li><a href="categorias.html">
+                            <span class="material-symbols-outlined" aria-hidden="true">category</span>
+                            <span>Categorías</span>
+                        </a></li>
                     <li><a href="pedidos.html">
                         <span class="material-symbols-outlined" aria-hidden="true">assignment</span>
                         <span>Pedidos</span>
@@ -58,7 +63,6 @@
         <main class="content">
             <div class="topbar">
                 <div class="topbar-izq">
-                    <button class="menu-btn" type="button" aria-label="Abrir menú">☰</button>
                     <p class="breadcrumb">Love Cookies <span>/</span> Clientes</p>
                 </div>
                 <div class="perfil">
@@ -68,7 +72,7 @@
             </div>
             <!-- LISTADO -->
             <section id="vista-lista">
-            <header class="header encabezado"><div><h1>Clientes</h1><p>Quienes compran tus galletas</p></div><button class="boton" type="button" data-nuevo><span class="material-symbols-outlined" aria-hidden="true">add</span> Nuevo cliente</button></header>
+            <header class="header encabezado"><div><h1>Clientes ✦</h1><p>Quienes compran tus galletas</p></div><button class="boton" type="button" data-nuevo><span class="material-symbols-outlined" aria-hidden="true">add</span> Nuevo cliente</button></header>
             <section class="resumen resumen-2">
                 <article class="resumen-card"><h2>0</h2><p>Clientes</p></article>
                 <article class="resumen-card"><h2>0</h2><p>Pedidos hechos</p></article>

@@ -103,6 +103,57 @@ button,input,select,textarea{
   color:#f4f3dc
 }
 
+.sidebar-toggle .material-symbols-outlined::before{
+  content:"chevron_left"
+}
+
+html.sidebar-colapsada .sidebar-toggle .material-symbols-outlined::before{
+  content:"chevron_right"
+}
+
+.sidebar.animacion-activa{
+  transition:width .25s ease
+}
+
+.sidebar.colapsada,
+html.sidebar-colapsada .sidebar{
+  width:82px
+}
+
+.sidebar.colapsada > .sidebar-toggle,
+html.sidebar-colapsada .sidebar > .sidebar-toggle{
+  margin-left:auto;
+  margin-right:auto
+}
+
+.sidebar.colapsada .logo,
+html.sidebar-colapsada .sidebar .logo{
+  height:100px
+}
+
+.sidebar.colapsada .logo img,
+html.sidebar-colapsada .sidebar .logo img{
+  width:54px;
+  height:54px;
+  object-fit:contain
+}
+
+.sidebar.colapsada .menu a,
+html.sidebar-colapsada .sidebar .menu a{
+  justify-content:center;
+  padding:15px 8px
+}
+
+.sidebar.colapsada .menu a span:not(.material-symbols-outlined),
+html.sidebar-colapsada .sidebar .menu a span:not(.material-symbols-outlined){
+  display:none
+}
+
+.sidebar.colapsada .menu a .material-symbols-outlined,
+html.sidebar-colapsada .sidebar .menu a .material-symbols-outlined{
+  font-size:1.5rem
+}
+
 /* ----- Barra superior con ruta (breadcrumb) y perfil ----- */
 .topbar{
   display:flex;
@@ -147,21 +198,6 @@ button,input,select,textarea{
   border-radius:50%;
   background-color:#a11a12;
   color:white;
-  cursor:pointer
-}
-
-/* Botón de menú (hamburguesa): solo se ve en tableta y celular */
-.menu-btn{
-  display:none;
-  align-items:center;
-  justify-content:center;
-  width:34px;
-  height:34px;
-  border:1px solid #a11a12;
-  border-radius:8px;
-  background:#f4f3dc;
-  color:#a11a12;
-  font-size:1.1rem;
   cursor:pointer
 }
 
@@ -240,24 +276,10 @@ button,input,select,textarea{
   gap:12px;align-items:center
 }
 
-/* ----- Tableta y celular (≤900px): el menú lateral se desliza ----- */
+/* ----- Ajustes de contenido para tableta y celular ----- */
 @media (max-width:900px){
-  .sidebar{position:fixed;top:0;left:0;height:100vh;z-index:20;overflow-y:auto;transform:translateX(-100%);transition:transform .25s}
-  .sidebar.abierto{transform:none;box-shadow:6px 0 20px rgba(0,0,0,.25)}
-  .menu-btn{display:inline-flex}
-  .sidebar-toggle{display:none}
   .content{padding:20px}
   .topbar{margin:-20px -20px 20px;padding:0 20px}
-}
-@media (min-width:901px){
-  .sidebar.animacion-activa{transition:width .25s ease}
-  .sidebar.colapsada{width:82px}
-  .sidebar.colapsada > .sidebar-toggle{margin-left:auto;margin-right:auto}
-  .sidebar.colapsada .logo{height:100px}
-  .sidebar.colapsada .logo img{width:54px;height:54px;object-fit:contain}
-  .sidebar.colapsada .menu a{justify-content:center;padding:15px 8px}
-  .sidebar.colapsada .menu a span:not(.material-symbols-outlined){display:none}
-  .sidebar.colapsada .menu a .material-symbols-outlined{font-size:1.5rem}
 }
 @media (max-width:700px){.resumen{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (prefers-reduced-motion:reduce){.sidebar{transition:none}}
