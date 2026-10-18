@@ -3,11 +3,10 @@ import { UsuarioRepository } from "../repositories/usuarioRepository.js";
 import { UsuarioView } from "../views/usuarioView.js";
 import { validateUsuario } from "../validators/usuarioValidator.js";
 import { BaseController } from "./baseController.js";
-import { initializeMenu } from "../utils/Menu.js";
 import { initializeProfile } from "../utils/Profile.js";
 import { hashPassword } from "../utils/Password.js";
 
-initializeMenu();
+window.initializeMenu();
 initializeProfile();
 const repository = new UsuarioRepository();
 const view = new UsuarioView(document.querySelector(".formulario"), UsuarioModel, repository);

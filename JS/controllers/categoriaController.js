@@ -4,10 +4,9 @@ import { ProductoRepository } from "../repositories/productoRepository.js";
 import { CategoriaView } from "../views/categoriaView.js";
 import { validateCategoria } from "../validators/categoriaValidator.js";
 import { BaseController } from "./baseController.js";
-import { initializeMenu } from "../utils/Menu.js";
 import { initializeProfile } from "../utils/Profile.js";
 
-initializeMenu();
+window.initializeMenu();
 initializeProfile();
 const repository = new CategoriaRepository();
 const productRepository = new ProductoRepository();

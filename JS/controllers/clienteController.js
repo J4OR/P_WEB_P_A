@@ -4,10 +4,9 @@ import { PedidoRepository } from "../repositories/pedidoRepository.js";
 import { ClienteView } from "../views/clienteView.js";
 import { validateCliente } from "../validators/clienteValidator.js";
 import { BaseController } from "./baseController.js";
-import { initializeMenu } from "../utils/Menu.js";
 import { initializeProfile } from "../utils/Profile.js";
 
-initializeMenu();
+window.initializeMenu();
 initializeProfile();
 const repository = new ClienteRepository();
 repository.orderRepository = new PedidoRepository();
