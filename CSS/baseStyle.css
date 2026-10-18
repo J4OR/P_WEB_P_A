@@ -103,6 +103,10 @@ button,input,select,textarea{
   color:#f4f3dc
 }
 
+.menu-movil-toggle{
+  display:none
+}
+
 .sidebar-toggle .material-symbols-outlined::before{
   content:"chevron_left"
 }
