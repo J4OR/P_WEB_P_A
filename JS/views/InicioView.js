@@ -1,6 +1,6 @@
-import { ProductoRepository } from "../repositories/ProductoRepository.js";
-import { PedidoRepository } from "../repositories/PedidoRepository.js";
-import { ClienteRepository } from "../repositories/ClienteRepository.js";
+import { ProductoRepository } from "../repositories/productoRepository.js";
+import { PedidoRepository } from "../repositories/pedidoRepository.js";
+import { ClienteRepository } from "../repositories/clienteRepository.js";
 
 export class InicioView {
   constructor() {
