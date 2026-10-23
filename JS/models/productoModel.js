@@ -1,8 +1,5 @@
 export class ProductoModel {
   static collection = "productos";
-  static get searchableFields() {
-    return ["nombre", "categoria", "descripcion"];
-  }
   static get counters() {
     return {
       Productos: (items) => items.length,

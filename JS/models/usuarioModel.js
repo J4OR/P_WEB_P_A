@@ -1,6 +1,5 @@
 export class UsuarioModel {
   static collection = "usuarios";
-  static get searchableFields() { return ["nombre", "correo", "rol"]; }
   static get counters() {
     return {
       Usuarios: (items) => items.length,

@@ -1,6 +1,5 @@
 export class ClienteModel {
   static collection = "clientes";
-  static get searchableFields() { return ["nombre", "identificacion", "celular"]; }
   static get counters() {
     return {
       Clientes: (items) => items.length,

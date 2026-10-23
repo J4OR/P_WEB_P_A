@@ -1,6 +1,5 @@
 export class PedidoModel {
   static collection = "pedidos";
-  static get searchableFields() { return ["cliente", "detalle", "estado", "entrega"]; }
   static get counters() {
     return {
       "Pedidos totales": (items) => items.length,

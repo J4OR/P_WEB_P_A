@@ -1,6 +1,5 @@
 export class CategoriaModel {
   static collection = "categorias";
-  static get searchableFields() { return ["nombre", "descripcion"]; }
   static get counters() {
     return { Categorías: (items) => items.length };
   }
