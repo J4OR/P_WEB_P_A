@@ -1,13 +1,16 @@
-import { clearErrors, showErrors } from "../validators/commonValidator.js";
+import { clearErrors, showErrors, validateCommon } from "../validators/commonValidator.js";
+import { initializeProfile } from "../utils/Profile.js";
 
 export class BaseController {
   constructor({ model, repository, view, validate, saveRecord, deleteRecord }) {
     this.model = model;
     this.repository = repository;
     this.view = view;
-    this.validate = validate;
+    this.validate = validate || this.validateForm.bind(this);
     this.saveRecord = saveRecord || this.saveThroughRepository.bind(this);
-    this.deleteRecord = deleteRecord || ((id) => this.repository.delete(id));
+    this.deleteRecord = deleteRecord || this.deleteFromRepository.bind(this);
+    window.initializeMenu?.();
+    initializeProfile();
     this.form = document.querySelector(".formulario");
     this.listSection = document.getElementById("vista-lista");
     this.formSection = document.getElementById("vista-formulario");
@@ -18,6 +21,10 @@ export class BaseController {
     this.bindEvents();
     this.refresh();
     if (location.hash === "#nuevo") this.openForm();
+  }
+
+  validateForm(form) {
+    return validateCommon(form);
   }
 
   bindEvents() {
@@ -54,6 +61,10 @@ export class BaseController {
 
   saveThroughRepository(data, id) {
     return id ? this.repository.update(id, data) : this.repository.add(data);
+  }
+
+  deleteFromRepository(id) {
+    return this.repository.delete(id);
   }
 
   openForm(row = null) {
@@ -129,11 +140,11 @@ export class BaseController {
     event.preventDefault();
     clearErrors(this.form);
 
-    const data = {
+    const data = new this.model({
       ...(this.model.initialValues?.() || {}),
       ...this.collectFormData()
-    };
-    this.model.prepare?.(this.form, data);
+    });
+    this.view.prepareData?.(data);
     const errors = this.validate(this.form, this.repository, this.editingId);
     if (errors.length) {
       showErrors(this.form, errors);

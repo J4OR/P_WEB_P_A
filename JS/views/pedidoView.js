@@ -29,6 +29,29 @@ export class PedidoView extends BaseEntityView {
     if (!products.length && productSelect?.options[0]) productSelect.options[0].textContent = "No hay productos registrados";
   }
 
+  prepareData(data) {
+    const client = this.form.querySelector('[name="cliente"]')?.selectedOptions[0];
+    data.clienteId = client?.value || "";
+    data.cliente = client?.dataset.nombre || client?.textContent.trim() || "";
+    data.direccion = data.entrega === "Domicilio" ? data.direccion : "";
+    data.productosPedido = [...this.form.querySelectorAll("#lineas .linea")]
+      .map((line) => {
+        const select = line.querySelector('[name="producto"]');
+        const option = select?.selectedOptions[0];
+        const cantidad = Number(line.querySelector('[name="cantidad"]')?.value || 0);
+        return select?.value ? {
+          productoId: select.value,
+          nombre: option?.textContent.trim() || "",
+          cantidad,
+          precio: Number(option?.dataset.precio) || 0
+        } : null;
+      })
+      .filter(Boolean);
+    data.producto = data.productosPedido.map((item) => item.nombre).join(", ");
+    data.cantidad = data.cantidadTotal;
+    data.actualizarDetalle();
+  }
+
   addLine(item = null) {
     this.lines.append(this.template.content.cloneNode(true));
     const line = this.lines.lastElementChild;

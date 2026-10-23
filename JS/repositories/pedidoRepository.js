@@ -1,7 +1,8 @@
 import { BaseRepository } from "./BaseRepository.js";
+import { PedidoModel } from "../models/pedidoModel.js";
 
 export class PedidoRepository extends BaseRepository {
   constructor(storage) {
-    super("pedidos", storage);
+    super(PedidoModel, storage);
   }
 }

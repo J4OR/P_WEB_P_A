@@ -19,6 +19,14 @@ export class BaseEntityView {
     this.emptyMarkup = this.tbody?.innerHTML || "";
   }
 
+  getValue(record, title, field) {
+    if (title === "Estado" || title === "Usuario activo") return record.estado;
+    if (title === "Total (COP)") return record.totalFormateado;
+    if (title === "Detalle (galletas y cantidades)") return record.detalle;
+    if (title === "Fecha de registro") return record.fechaRegistro;
+    return field ? record[field.name] ?? "" : record[title.toLocaleLowerCase()] ?? "";
+  }
+
   render(records = this.repository.getAll()) {
     if (!this.tbody) return;
     renderCounters(this.model, records, this.repository);
@@ -44,11 +52,9 @@ export class BaseEntityView {
           cell.innerHTML = '<button class="icono-boton" type="button" data-editar aria-label="Editar"><span class="material-symbols-outlined" aria-hidden="true">edit</span></button><button class="icono-boton" type="button" data-eliminar aria-label="Eliminar"><span class="material-symbols-outlined" aria-hidden="true">delete</span></button>';
         } else {
           const field = fields.find((item) => Number(item.dataset.col) === index);
-          const value = this.model.columns?.[title]
-            ? this.model.columns[title](record, this.repository)
-            : field ? record[field.name] ?? "" : "";
+          const value = this.getValue(record, title, field);
 
-          if (this.model.statusColumns?.includes(title)) {
+          if (["Estado", "Usuario activo"].includes(title)) {
             const badge = document.createElement("span");
             badge.className = "estado " + (badgeClasses[String(value).toLowerCase()] || "");
             badge.textContent = value;

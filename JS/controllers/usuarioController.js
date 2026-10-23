@@ -1,23 +1,31 @@
-import { UsuarioModel } from "../models/usuarioModel.js";
 import { UsuarioRepository } from "../repositories/usuarioRepository.js";
 import { UsuarioView } from "../views/usuarioView.js";
 import { validateUsuario } from "../validators/usuarioValidator.js";
 import { BaseController } from "./baseController.js";
-import { initializeProfile } from "../utils/Profile.js";
 import { hashPassword } from "../utils/Password.js";
 
-window.initializeMenu();
-initializeProfile();
-const repository = new UsuarioRepository();
-const view = new UsuarioView(document.querySelector(".formulario"), UsuarioModel, repository);
-new BaseController({
-  model: UsuarioModel,
-  repository,
-  view,
-  validate: (form, repo, id) => validateUsuario(form, repo, id),
-  saveRecord: async (data, id) => {
+export class UsuarioController extends BaseController {
+  constructor() {
+    const repository = new UsuarioRepository();
+    const view = new UsuarioView(
+      document.querySelector(".formulario"),
+      repository.ModelClass,
+      repository
+    );
+    super({ model: repository.ModelClass, repository, view });
+  }
+
+  validateForm(form, repository, id) {
+    return validateUsuario(form, repository, id);
+  }
+
+  async saveThroughRepository(data, id) {
     const { contrasena, confirmarContrasena, ...userData } = data;
     if (contrasena) userData.passwordHash = await hashPassword(contrasena);
-    return id ? repository.update(id, userData) : repository.add(userData);
+    return id
+      ? this.repository.update(id, userData)
+      : this.repository.add(userData);
   }
-});
+}
+
+new UsuarioController();

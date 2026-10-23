@@ -1,39 +1,17 @@
-import { ProductoRepository } from "../repositories/productoRepository.js";
-import { PedidoRepository } from "../repositories/pedidoRepository.js";
-import { ClienteRepository } from "../repositories/clienteRepository.js";
-
 export class InicioView {
-  constructor() {
-    this.orders = new PedidoRepository();
-    this.products = new ProductoRepository();
-    this.clients = new ClienteRepository();
-  }
-
-  initialize() {
+  renderDate() {
     const date = document.getElementById("fecha");
     if (date) {
-      let text = new Date().toLocaleDateString("es-CO", {
+      const text = new Date().toLocaleDateString("es-CO", {
         weekday: "long", day: "numeric", month: "long", year: "numeric"
       });
       date.textContent = text.charAt(0).toUpperCase() + text.slice(1);
     }
-    this.render();
-    window.addEventListener("storage", () => this.render());
-    document.getElementById("nuevo-pedido")?.addEventListener("click", () => {
-      location.href = "pedidos.html#nuevo";
-    });
-    document.getElementById("nuevo-producto")?.addEventListener("click", () => {
-      location.href = "productos.html#nuevo";
-    });
   }
 
-  render() {
-    const orders = this.orders.getAll();
-    const products = this.products.getAll();
-    const clients = this.clients.getAll();
-    const total = orders.reduce((sum, order) => sum + (Number(String(order.total || 0).replace(/[^\d-]/g, "")) || 0), 0);
-    this.setText("ventas-totales", "$" + total.toLocaleString("es-CO"));
-    this.setText("pedidos-pendientes", orders.filter((order) => order.estado === "Pendiente").length);
+  render({ orders, products, clients, totalSales, pendingOrders }) {
+    this.setText("ventas-totales", "$" + totalSales.toLocaleString("es-CO"));
+    this.setText("pedidos-pendientes", pendingOrders);
     this.setText("total-productos", products.length);
     this.setText("total-clientes", clients.length);
     this.renderRecentOrders(orders);
@@ -69,7 +47,7 @@ export class InicioView {
       summary.textContent = order.detalle || order.entrega || "";
       status.className = "estado " + (order.estado === "Entregado" ? "entregado" : "pendiente");
       status.textContent = order.estado || "Sin estado";
-      total.textContent = "$" + (Number(String(order.total || 0).replace(/[^\d-]/g, "")) || 0).toLocaleString("es-CO");
+      total.textContent = order.totalFormateado;
       details.append(client, summary);
       row.append(details, status, total);
       panel.append(row);
@@ -80,8 +58,8 @@ export class InicioView {
     const panel = document.querySelector(".panel.stock");
     if (!panel) return;
     panel.querySelectorAll(".producto-stock, .mensaje-vacio").forEach((item) => item.remove());
-    const lowStock = products.filter((product) => Number(product.stock) <= 5)
-      .sort((a, b) => Number(a.stock) - Number(b.stock));
+    const lowStock = products.filter((product) => product.stockBajo)
+      .sort((a, b) => a.stock - b.stock);
     if (!lowStock.length) {
       const empty = document.createElement("p");
       empty.className = "mensaje-vacio";
