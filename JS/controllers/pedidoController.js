@@ -58,7 +58,7 @@ export class PedidoController extends BaseController {
   deleteFromRepository(id) {
     const order = this.repository.getById(id);
     if (!order) return false;
-    if (!order.inventarioDescontado || order.estado === "Entregado") {
+    if (!order.inventarioDescontado) {
       return super.deleteFromRepository(id);
     }
 
