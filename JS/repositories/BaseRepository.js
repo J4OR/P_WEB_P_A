@@ -15,7 +15,7 @@ export class BaseRepository {
       return [];
     }
   }
-
+  
   save(records) {
     try {
       this.storage.setItem(this.collection, JSON.stringify(records));
